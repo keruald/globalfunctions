@@ -1,0 +1,29 @@
+{
+    "name": "keruald/globalfunctions",
+    "description": "Essential core global functions",
+    "type": "library",
+    "license": "BSD",
+    "version": "0.1.0",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/keruald/globalfunctions"
+        }
+    ],
+    "keywords": [
+        "keruald",
+        "core",
+        "global funtions"
+    ],
+    "require": {
+        "php": ">=5.0"
+    },
+    "autoload": {
+        "files": ["core.php"]
+    },
+    "support": {
+            "irc": "irc://irc.freenode.net/wolfplex",
+            "issues": "http://devcentral.nasqueron.org"
+    }
+
+}

@@ -13,7 +13,7 @@
     "keywords": [
         "keruald",
         "core",
-        "global funtions"
+        "global functions"
     ],
     "require": {
         "php": ">=5.0"

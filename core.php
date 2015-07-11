@@ -9,6 +9,56 @@ namespace Keruald;
  */
 
 ///
+/// Strings
+///
+
+/**
+ * Pads a multibytes string to a certain length with another string
+ *
+ * @param string $str the input string
+ * @param int $pad_length the target string size
+ * @param string $pad_string the padding characters (optional, default is space)
+ * @param int $pad_type STR_PAD_RIGHT, STR_PAD_LEFT, or STR_PAD_BOTH (optional, default is STR_PAD_RIGHT)
+ * @param string the character encoding (optional)
+ *
+ * @return string the padded string
+ *
+ */
+function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_RIGHT, $encoding = null) {
+    // Inspired by Ronald Ulysses Swanson method
+    // http://stackoverflow.com/a/27194169/1930997
+    // who followed the str_pad PHP implementation.
+
+    if ($encoding === null) {
+        $encoding = mb_internal_encoding();
+    }
+
+    $padBefore = $pad_type === STR_PAD_BOTH || $pad_type === STR_PAD_LEFT;
+    $padAfter = $pad_type === STR_PAD_BOTH || $pad_type === STR_PAD_RIGHT;
+
+    $pad_length -= mb_strlen($input, $encoding);
+    if ($padBefore && $padAfter) {
+        $targetLength = $pad_length / 2;
+    } else {
+        $targetLength = $pad_length;
+    }
+    $strToRepeatLength = mb_strlen($pad_string, $encoding);
+    $repeatTimes = ceil($targetLength / $strToRepeatLength);
+    $repeatedString = str_repeat($pad_string, max(0, $repeatTimes)); // safe if used with valid Unicode sequences (any charset)
+
+    $paddedString = '';
+    if ($padBefore) {
+        $paddedString = mb_substr($repeatedString, 0, floor($targetLength), $encoding);
+    }
+    $paddedString .= $input;
+    if ($padAfter) {
+        $paddedString .= mb_substr($repeatedString, 0, ceil($targetLength), $encoding);
+    }
+
+    return $paddedString;
+}
+
+///
 /// Error and debug
 ///
  

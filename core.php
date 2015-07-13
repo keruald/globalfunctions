@@ -147,7 +147,7 @@ function extract_client_ip_from_header ($value) {
  * Gets remote IP address.
  *
  * This is intended as a drop-in replacement for $_SERVER['REMOTE_ADDR'],
- * which takes in consideration proxy values.
+ * which takes in consideration proxy values, blindly trusted.
  */
 function get_remote_addr () {
     $candidates = [

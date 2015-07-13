@@ -41,6 +41,23 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
     }
 
     ///
+    /// Identifiers
+    ///
+
+    function test_uuid () {
+        $uuid = uuid();
+        $this->assertEquals(36, strlen($uuid));
+        for ($i = 0 ; $i < 36 ; $i++) {
+            if ($i == 8 | $i == 13 || $i == 18 || $i == 23) {
+                $this->assertEquals("-", $uuid[$i], "Dash were expected.");
+                continue;
+            }
+
+            $this->assertRegExp('/[0-9a-f]/', $uuid[$i], "Lowercase hexadecimal digit were expected.");
+        }
+    }
+
+    ///
     /// Client information
     ///
 

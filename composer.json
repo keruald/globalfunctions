@@ -3,7 +3,7 @@
     "description": "Essential core global functions",
     "type": "library",
     "license": "BSD",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "repositories": [
         {
             "type": "vcs",

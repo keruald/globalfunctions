@@ -58,6 +58,37 @@ function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_
     return $paddedString;
 }
 
+/**
+ * Determines whether the specified is a valid IP address
+ *
+ * @param $string the string to validate as an IP
+ * @return bool true if the specified string is a valid IP address; otherwise, false
+ */
+function is_ip ($string) {
+    return is_ipv4($string) || is_ipv6($string);
+}
+
+/**
+ * Determines whether the specified is a valid IPv4 address
+ *
+ * @param $string the string to validate as an IP
+ * @return bool true if the specified string is a valid IPv4 address; otherwise, false
+ */
+function is_ipv4 ($string) {
+    return filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
+}
+
+/**
+ * Determines whether the specified is a valid IPv6 address
+ *
+ * @param $string the string to validate as an IP
+ * @return bool true if the specified string is a valid IPv6 address; otherwise, false
+ */
+function is_ipv6 ($string) {
+    return filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
+}
+
+
 ///
 /// Identifiers
 ///

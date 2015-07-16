@@ -40,6 +40,46 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
         $this->assertEquals('FOOBAR', mb_str_pad("FOOBAR", -10, "àèò", STR_PAD_RIGHT, "UTF-8"));
     }
 
+    function test_is_ip () {
+        $this->assertTrue(is_ip("0.0.0.0"));
+        $this->assertFalse(is_ip(""));
+        $this->assertFalse(is_ip("1"));
+        $this->assertFalse(is_ip("17.17"));
+        $this->assertTrue(is_ip("17.17.17.17"));
+        $this->assertFalse(is_ip("17.17.17.256"));
+        $this->assertTrue(is_ip("fe80:0000:0000:0000:0204:61ff:fe9d:f156"));
+    }
+
+    function test_is_ipv4 () {
+        $this->assertTrue(is_ipv4("0.0.0.0"));
+        $this->assertFalse(is_ipv4(""));
+        $this->assertFalse(is_ipv4("1"));
+        $this->assertFalse(is_ipv4("17.17"));
+        $this->assertTrue(is_ipv4("17.17.17.17"));
+        $this->assertFalse(is_ipv4("17.17.17.256"));
+        $this->assertFalse(is_ipv4(""));
+        $this->assertFalse(is_ipv4("fe80:0000:0000:0000:0204:61ff:fe9d:f156"));
+    }
+
+    function test_is_ipv6 () {
+        $this->assertFalse(is_ipv6("0.0.0.0"));
+        $this->assertFalse(is_ipv6(""));
+        $this->assertFalse(is_ipv6("1"));
+        $this->assertFalse(is_ipv6("17.17"));
+        $this->assertFalse(is_ipv6("17.17.17.17"));
+        $this->assertTrue(is_ipv6("::1"));
+        $this->assertFalse(is_ipv6("::fg"));
+        $this->assertTrue(is_ipv6("::1"));
+
+        //Advanced IPv6 tests curated by Stephen Ryan
+        //Source: http://forums.dartware.com/viewtopic.php?t=452
+        $this->assertTrue(is_ipv6("fe80:0000:0000:0000:0204:61ff:fe9d:f156"));
+        $this->assertFalse(is_ipv6("02001:0000:1234:0000:0000:C1C0:ABCD:0876"), "extra 0 not allowed");
+        $this->assertFalse(is_ipv6("2001:0000:1234:0000:00001:C1C0:ABCD:0876"), "extra 0 not allowed");
+        $this->assertFalse(is_ipv6("1.2.3.4:1111:2222:3333:4444::5555"));
+        $this->assertTrue(is_ipv6("::ffff:192.0.2.128"), "can't validate IPv4 represented as dotted-quads");
+    }
+
     ///
     /// Identifiers
     ///

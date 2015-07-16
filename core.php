@@ -15,11 +15,11 @@ namespace Keruald;
 /**
  * Pads a multibytes string to a certain length with another string
  *
- * @param string $str the input string
+ * @param string $input the input string
  * @param int $pad_length the target string size
  * @param string $pad_string the padding characters (optional, default is space)
  * @param int $pad_type STR_PAD_RIGHT, STR_PAD_LEFT, or STR_PAD_BOTH (optional, default is STR_PAD_RIGHT)
- * @param string the character encoding (optional)
+ * @param string $encoding the character encoding (optional)
  *
  * @return string the padded string
  *
@@ -61,7 +61,7 @@ function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_
 /**
  * Determines whether the specified is a valid IP address
  *
- * @param $string the string to validate as an IP
+ * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IP address; otherwise, false
  */
 function is_ip ($string) {
@@ -71,7 +71,7 @@ function is_ip ($string) {
 /**
  * Determines whether the specified is a valid IPv4 address
  *
- * @param $string the string to validate as an IP
+ * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IPv4 address; otherwise, false
  */
 function is_ipv4 ($string) {
@@ -81,7 +81,7 @@ function is_ipv4 ($string) {
 /**
  * Determines whether the specified is a valid IPv6 address
  *
- * @param $string the string to validate as an IP
+ * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IPv6 address; otherwise, false
  */
 function is_ipv6 ($string) {
@@ -96,7 +96,7 @@ function is_ipv6 ($string) {
 /**
  * Generates a RFC 4211 compliant v4 UUID (random-based)
  *
- * @return string The UUID
+ * @return string the UUID
  */
 function uuid () {
     //Code by Andrew Moore
@@ -159,7 +159,7 @@ function dieprint_r ($variable) {
 /**
  * Returns the full header or the IP part of it
  *
- * @param string $value The header value
+ * @param string $value the header value
  * @return string the IP part
  */
 function extract_client_ip_from_header ($value) {
@@ -179,6 +179,8 @@ function extract_client_ip_from_header ($value) {
  *
  * This is intended as a drop-in replacement for $_SERVER['REMOTE_ADDR'],
  * which takes in consideration proxy values, blindly trusted.
+ *
+ * @return string the remote address
  */
 function get_remote_addr () {
     $candidates = [

@@ -2,6 +2,8 @@
 
 namespace Keruald;
 
+require 'core.php';
+
 class CoreTest extends \PHPUnit_Framework_Testcase {
 
     ///

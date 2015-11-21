@@ -1,4 +1,5 @@
 {
   "phabricator.uri": "http://devcentral.nasqueron.org",
-  "repository.callsign": "KGF"
+  "repository.callsign": "KGF",
+  "unit.engine": "PhpunitTestEngine"
 }

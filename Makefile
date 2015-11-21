@@ -1,2 +1,2 @@
 test:
-	phpunit --bootstrap core.php tests/CoreTest
+	phpunit tests/coreTest

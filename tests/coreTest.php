@@ -10,6 +10,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
     /// Strings
     ///
 
+    /**
+     * @covers ::mb_str_pad
+     */
     function test_mb_str_pad () {
         // Tests from http://3v4l.org/UnXTF
         // http://web.archive.org/web/20150711100913/http://3v4l.org/UnXTF
@@ -42,6 +45,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
         $this->assertEquals('FOOBAR', mb_str_pad("FOOBAR", -10, "àèò", STR_PAD_RIGHT, "UTF-8"));
     }
 
+    /**
+     * @covers ::is_ip
+     */
     function test_is_ip () {
         $this->assertTrue(is_ip("0.0.0.0"));
         $this->assertFalse(is_ip(""));
@@ -52,6 +58,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
         $this->assertTrue(is_ip("fe80:0000:0000:0000:0204:61ff:fe9d:f156"));
     }
 
+    /**
+     * @covers ::is_ipv4
+     */
     function test_is_ipv4 () {
         $this->assertTrue(is_ipv4("0.0.0.0"));
         $this->assertFalse(is_ipv4(""));
@@ -63,6 +72,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
         $this->assertFalse(is_ipv4("fe80:0000:0000:0000:0204:61ff:fe9d:f156"));
     }
 
+    /**
+     * @covers ::is_ipv6
+     */
     function test_is_ipv6 () {
         $this->assertFalse(is_ipv6("0.0.0.0"));
         $this->assertFalse(is_ipv6(""));
@@ -86,6 +98,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
     /// Identifiers
     ///
 
+    /**
+     * @covers ::uuid
+     */
     function test_uuid () {
         $uuid = uuid();
         $this->assertEquals(36, strlen($uuid));
@@ -103,6 +118,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
     /// Client information
     ///
 
+    /**
+     * @covers ::extract_client_ip_from_header
+     */
     function test_extract_client_ip_from_header () {
         $values = [
             //Each value should return 10.0.0.3
@@ -123,6 +141,9 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
         );
     }
 
+    /**
+     * @covers ::get_remote_addr
+     */
     function test_get_remote_addr () {
         $this->assertEmpty(get_remote_addr());
 

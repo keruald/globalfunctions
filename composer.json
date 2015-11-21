@@ -16,7 +16,7 @@
         "global functions"
     ],
     "require": {
-        "php": ">=5.0"
+        "php": ">=5.4.0"
     },
     "autoload": {
         "files": ["core.php"]

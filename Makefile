@@ -1,2 +1,7 @@
+all: vendor
+
+vendor:
+	composer install
+
 test:
-	phpunit tests/coreTest
+	vendor/bin/phpunit

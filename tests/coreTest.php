@@ -4,7 +4,7 @@ namespace Keruald;
 
 require 'core.php';
 
-class CoreTest extends \PHPUnit_Framework_Testcase {
+class CoreTest extends \PHPUnit\Framework\TestCase {
 
     ///
     /// Strings
@@ -143,6 +143,7 @@ class CoreTest extends \PHPUnit_Framework_Testcase {
 
     /**
      * @covers ::get_remote_addr
+     * @backupGlobals enabled
      */
     function test_get_remote_addr () {
         $this->assertEmpty(get_remote_addr());

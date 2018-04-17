@@ -2,6 +2,7 @@
 
 namespace Keruald;
 
+use Keruald\OmniTools\Network\IP;
 use Keruald\OmniTools\Strings\Multibyte\StringUtilities;
 
 /**
@@ -35,9 +36,10 @@ function mb_str_pad($input, $pad_length, $pad_string = ' ', $pad_type = STR_PAD_
  *
  * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IP address; otherwise, false
+ * @deprecated Use Keruald\OmniTools\Network\IP::isIP
  */
 function is_ip ($string) {
-    return is_ipv4($string) || is_ipv6($string);
+    return IP::isIP($string);
 }
 
 /**
@@ -45,9 +47,10 @@ function is_ip ($string) {
  *
  * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IPv4 address; otherwise, false
+ * @deprecated Use Keruald\OmniTools\Network\IP::isIPv4
  */
 function is_ipv4 ($string) {
-    return filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
+    return IP::isIPv4($string);
 }
 
 /**
@@ -55,9 +58,10 @@ function is_ipv4 ($string) {
  *
  * @param string $string the string to validate as an IP
  * @return bool true if the specified string is a valid IPv6 address; otherwise, false
+ * @deprecated Use Keruald\OmniTools\Network\IP::isIPv6
  */
 function is_ipv6 ($string) {
-    return filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
+    return IP::isIPv6($string);
 }
 
 

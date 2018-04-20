@@ -2,6 +2,7 @@
 
 namespace Keruald;
 
+use Keruald\OmniTools\Debug\Debugger;
 use Keruald\OmniTools\Identifiers\UUID;
 use Keruald\OmniTools\Network\IP;
 use Keruald\OmniTools\Strings\Multibyte\StringUtilities;
@@ -90,9 +91,7 @@ function uuid () {
  * @param mixed $variable the variable to dump
  */
 function dprint_r ($variable) {
-    echo '<pre>';
-    print_r($variable);
-    echo '</pre>';
+    Debugger::printVariable($variable);
 }
 
 /**
@@ -102,9 +101,8 @@ function dprint_r ($variable) {
  * @param mixed $variable the variable to dump
  */
 function dieprint_r ($variable) {
-    dprint_r($variable);
-    die;
-};
+    Debugger::printVariableAndDie($variable);
+}
 
 ///
 /// Client information

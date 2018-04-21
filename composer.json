@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "keruald/omnitools": "dev-master"
+        "keruald/omnitools": "^0.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

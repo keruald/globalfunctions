@@ -5,6 +5,8 @@ namespace Keruald;
 use Keruald\OmniTools\Debug\Debugger;
 use Keruald\OmniTools\Identifiers\UUID;
 use Keruald\OmniTools\Network\IP;
+use Keruald\OmniTools\HTTP\Requests\RemoteAddress;
+use Keruald\OmniTools\HTTP\Requests\Request;
 use Keruald\OmniTools\Strings\Multibyte\StringUtilities;
 
 /**
@@ -113,17 +115,10 @@ function dieprint_r ($variable) {
  *
  * @param string $value the header value
  * @return string the IP part
+ * @deprecated
  */
 function extract_client_ip_from_header ($value) {
-    if (strpos($value, ',') !== false) {
-        //Header contains 'clientIP, proxyIP, anotherProxyIP'
-        //The first value is so the one to return.
-        //See draft-ietf-appsawg-http-forwarded-10.
-        $ips = explode(',', $value, 2);
-        return trim($ips[0]);
-    }
-
-    return $value;
+    return (new RemoteAddress($value))->getClientAddress();
 }
 
 /**
@@ -133,28 +128,8 @@ function extract_client_ip_from_header ($value) {
  * which takes in consideration proxy values, blindly trusted.
  *
  * @return string the remote address
+ * @deprecated Use Keruald\OmniTools\HTTP\Requests\Request::getRemoteAddress()
  */
 function get_remote_addr () {
-    $candidates = [
-        //Standard header provided by draft-ietf-appsawg-http-forwarded-10
-        'HTTP_X_FORWARDED_FOR',
-
-        //Legacy headers
-        'HTTP_CLIENT_IP',
-        'HTTP_FORWARDED',
-        'HTTP_FORWARDED_FOR',
-        'HTTP_X_CLUSTER_CLIENT_IP',
-        'HTTP_X_FORWARDED',
-
-        //Default header if no proxy information could be detected
-        'REMOTE_ADDR',
-    ];
-
-    foreach ($candidates as $candidate) {
-        if (array_key_exists($candidate, $_SERVER)) {
-            return extract_client_ip_from_header($_SERVER[$candidate]);
-        }
-    }
-
-    return '';
+    return Request::getRemoteAddress();
 }
